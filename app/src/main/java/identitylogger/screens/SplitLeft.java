@@ -7,7 +7,6 @@ import javax.swing.event.ListSelectionEvent;
 
 import identitylogger.util.People;
 import identitylogger.database.DBGetPeople;
-import identitylogger.screens.ListRenderer;
 
 
 public class SplitLeft extends JList<People> {
@@ -24,8 +23,6 @@ public class SplitLeft extends JList<People> {
         this.addListSelectionListener(new ListSelectionListener() {
             public void valueChanged(ListSelectionEvent e) {
                 if (!e.getValueIsAdjusting()) {
-                    System.out.println(getSelectedIndex());
-                    System.out.println(currentListItems.get(getSelectedIndex()).getDBID());
                     right.updatePerson(currentListItems.get(getSelectedIndex()).getDBID());
                 }
             }

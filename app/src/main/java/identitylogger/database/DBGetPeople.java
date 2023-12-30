@@ -32,7 +32,6 @@ public class DBGetPeople {
             while(rs.next()) {
                 int id = rs.getInt("id");
                 String name = rs.getString("name");
-                System.out.println("ID: "+id+"Name: "+name);
 
                 People person = new People(id,name);
 

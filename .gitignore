@@ -4,4 +4,10 @@
 # Ignore Gradle build output directory
 build
 
+#ignore properties folder holding username and password
 application.properties
+
+#ignore folder holding the persons image except the default-avatar
+!personImages
+personImages/*
+!personImages/default-avatar.jpg
