@@ -1,40 +1,44 @@
 package peopleproject.screens;
 
-import java.sql.Statement;
+import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.awt.Dimension;
+import java.awt.GridLayout;
+
+import peopleproject.util.ReadProperties;
+import peopleproject.database.DBConnection;
+import peopleproject.screens.*;
 
 public class Main {
-    public static void main(String[] args) throws SQLException, ClassNotFoundException {
-        String getNoRows = "select count(*) from people";
-        String sql = "select name from people";
+    public static void main(String[] args) {
+        JFrame mainFrame = new JFrame("People Project");
+        mainFrame.setSize(800,500);
+        mainFrame.setMinimumSize(new Dimension(300,500));
+        //mainFrame.setLayout(new GridLayout());
+        mainFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
-        
-        Class.forName("org.mariadb.jdbc.Driver");
-        System.out.println("Driver loaded");
 
-        //put try catch here
-        Connection connection = DriverManager.getConnection("jdbc:mariadb://localhost/peopleViewer", "jproject", "password");
-        
-        System.out.println("It works!");
+        ReadProperties rp = new ReadProperties();
 
-        Statement st = connection.createStatement();
-        ResultSet rs = st.executeQuery(getNoRows);
-        rs.next();
-
-        int noOfItems = rs.getInt(1);
-        System.out.println(noOfItems);
-
-        rs = st.executeQuery(sql);
-
-        for(int i=0;i<noOfItems;i++) {
-        rs.next();
-        String name = rs.getString(1);
-
-        System.out.println(name);
+        String[] up = rp.getUsernamePassword();
+        if( up[0].isEmpty() || up[1].isEmpty()) {
+            JOptionPane.showMessageDialog(mainFrame,"Username or Password not set");
+            System.out.println("Username or Password not set");
+            System.exit(1);
         }
-        connection.close();
+
+         Connection dbConnection = new DBConnection().connect();
+
+         SplitRight right = new SplitRight();
+         SplitLeft left = new SplitLeft(right);
+
+
+         MainSplitPane mainSplitPane = new MainSplitPane(left, right);
+
+         mainFrame.add(mainSplitPane);
+         mainFrame.setVisible(true);
+
+         mainSplitPane.setDividerLocation(0.3); //can only set after placing adding the splitFrame to mainFrame
     }
 }
