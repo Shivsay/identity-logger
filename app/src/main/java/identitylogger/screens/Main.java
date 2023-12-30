@@ -2,6 +2,10 @@ package identitylogger.screens;
 
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
+import javax.swing.JPanel;
+import javax.swing.JScrollPane;
+import javax.swing.JSplitPane;
+
 import java.sql.Connection;
 import java.awt.Dimension;
 import java.awt.GridLayout;
@@ -15,8 +19,11 @@ public class Main {
         JFrame mainFrame = new JFrame("People Project");
         mainFrame.setSize(800,500);
         mainFrame.setMinimumSize(new Dimension(800,500));
-        //mainFrame.setLayout(new GridLayout());
         mainFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+
+        //mainFrame.setLayout(new GridLayout(1, 2));
+
+
 
 
         ReadProperties rp = new ReadProperties();
@@ -30,15 +37,31 @@ public class Main {
 
          Connection dbConnection = new DBConnection().connect();
 
+
+
          SplitRight right = new SplitRight();
+
          SplitLeft left = new SplitLeft(right);
+         JScrollPane scrollPane = new JScrollPane(left, JScrollPane.VERTICAL_SCROLLBAR_ALWAYS,JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
 
 
-         MainSplitPane mainSplitPane = new MainSplitPane(left, right);
+         MainSplitPane mainSplitPane = new MainSplitPane(scrollPane, right);
 
-         mainFrame.add(mainSplitPane);
+         JPanel controlPanel = new JPanel();
+
+         JSplitPane jSplitPane = new JSplitPane(JSplitPane.VERTICAL_SPLIT,controlPanel,mainSplitPane);
+         jSplitPane.setDividerSize(-1);
+         jSplitPane.setResizeWeight(0.05);
+
+         mainFrame.add(jSplitPane);
+
+         //mainFrame.add(mainSplitPane);
          mainFrame.setVisible(true);
 
-         mainSplitPane.setDividerLocation(0.3); //can only set after placing adding the splitFrame to mainFrame
+         jSplitPane.setDividerLocation(0.05);
+
+         //can only set after placing adding the splitFrame to mainFrame
+
+         mainSplitPane.setDividerLocation(0.3); 
     }
 }

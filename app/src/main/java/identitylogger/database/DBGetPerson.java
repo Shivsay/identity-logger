@@ -17,11 +17,11 @@ public class DBGetPerson {
     }
 
     public Person getPerson() {
-        String name;
+        String name, description;
         Date dob;
         
         try {
-            String sqlPersonInfo = "SELECT id, name, dob FROM people where id = ?";
+            String sqlPersonInfo = "SELECT id, name, dob, description FROM people where id = ?";
             PreparedStatement st = dbConn.prepareStatement(sqlPersonInfo);
             st.setInt(1, this.id);
             ResultSet rs = st.executeQuery();
@@ -29,8 +29,9 @@ public class DBGetPerson {
 
             name = rs.getString("name");
             dob = rs.getDate("dob");
+            description = rs.getString("description");
 
-            Person person = new Person(name,dob);
+            Person person = new Person(name,dob,description);
 
             return person;
 
