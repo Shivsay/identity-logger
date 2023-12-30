@@ -1,4 +1,4 @@
-package peopleproject.util;
+package identitylogger.util;
 
 import java.sql.Date;
 

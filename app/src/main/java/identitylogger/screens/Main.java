@@ -1,4 +1,4 @@
-package peopleproject.screens;
+package identitylogger.screens;
 
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
@@ -6,15 +6,15 @@ import java.sql.Connection;
 import java.awt.Dimension;
 import java.awt.GridLayout;
 
-import peopleproject.util.ReadProperties;
-import peopleproject.database.DBConnection;
-import peopleproject.screens.*;
+import identitylogger.util.ReadProperties;
+import identitylogger.database.DBConnection;
+import identitylogger.screens.*;
 
 public class Main {
     public static void main(String[] args) {
         JFrame mainFrame = new JFrame("People Project");
         mainFrame.setSize(800,500);
-        mainFrame.setMinimumSize(new Dimension(300,500));
+        mainFrame.setMinimumSize(new Dimension(800,500));
         //mainFrame.setLayout(new GridLayout());
         mainFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 

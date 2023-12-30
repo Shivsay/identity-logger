@@ -1,11 +1,11 @@
-package peopleproject.screens;
+package identitylogger.screens;
 
 import javax.swing.JLabel;
 import java.awt.Component;
 import javax.swing.ListCellRenderer;
 import javax.swing.JList;
 
-import peopleproject.util.People;
+import identitylogger.util.People;
 
 public class ListRenderer extends JLabel implements ListCellRenderer<People> {
 

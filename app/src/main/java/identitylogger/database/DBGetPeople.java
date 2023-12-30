@@ -1,17 +1,14 @@
-package peopleproject.database;
+package identitylogger.database;
 
 
 
-import java.beans.Statement;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Connection;
-import java.util.ArrayList;
 import java.util.Vector;
 
-import peopleproject.util.People;
-import peopleproject.database.DBConnection;
+import identitylogger.util.People;
 
 public class DBGetPeople {
     Connection dbConn = new DBConnection().connect();

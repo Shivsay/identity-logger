@@ -38,13 +38,13 @@ java {
 
 jar {
     manifest {
-        attributes 'Main-Class': 'peopleproject.screens.Main'
+        attributes 'Main-Class': 'identitylogger.screens.Main'
     }
 }
 
 application {
     // Define the main class for the application.
-    mainClass = 'peopleproject.screens.Main'
+    mainClass = 'identitylogger.screens.Main'
 }
 
 tasks.named('test') {

@@ -1,13 +1,13 @@
-package peopleproject.screens;
+package identitylogger.screens;
 
 import java.util.Vector;
 import javax.swing.JList;
 import javax.swing.event.ListSelectionListener;
 import javax.swing.event.ListSelectionEvent;
 
-import peopleproject.util.People;
-import peopleproject.database.DBGetPeople;
-import peopleproject.screens.ListRenderer;
+import identitylogger.util.People;
+import identitylogger.database.DBGetPeople;
+import identitylogger.screens.ListRenderer;
 
 
 public class SplitLeft extends JList<People> {
