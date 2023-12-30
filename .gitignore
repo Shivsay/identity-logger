@@ -8,6 +8,5 @@ build
 application.properties
 
 #ignore folder holding the persons image except the default-avatar
-!personImages
 personImages/*
 !personImages/default-avatar.jpg
