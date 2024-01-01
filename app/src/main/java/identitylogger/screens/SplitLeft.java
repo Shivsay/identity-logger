@@ -35,6 +35,8 @@ public class SplitLeft extends JList<People> {
     public void updateList() {
         DBGetPeople dbGetPeople = new DBGetPeople();
         this. currentListItems = dbGetPeople.updatePeopleList(); 
+        this.setListData(currentListItems);
+        return ;
     }
 
 }

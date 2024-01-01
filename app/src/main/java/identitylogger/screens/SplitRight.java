@@ -3,10 +3,13 @@ package identitylogger.screens;
 import java.awt.Color;
 import java.awt.FlowLayout;
 import java.awt.Image;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.sql.Date;
 
 import javax.swing.BoxLayout;
 import javax.swing.ImageIcon;
+import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
@@ -14,6 +17,8 @@ import javax.swing.JSplitPane;
 import javax.swing.JTextArea;
 import javax.swing.border.EmptyBorder;
 import java.awt.Font;
+
+import identitylogger.database.DBDeletePerson;
 import identitylogger.util.Person;
 import identitylogger.database.DBGetPerson;
 
@@ -21,23 +26,18 @@ public class SplitRight extends JSplitPane {
     String name;
     Date dob;
     Person person;
+    int id;
 
     JPanel lPanel, rPanel;
 
     public SplitRight() {
         super.setDividerSize(-1);
-        //super.setResizeWeight(0.2);
         this.updatePerson(0);       //TODO
-
-        /*JPanel lPanel = leftPanel();
-        JPanel rPanel = rightPanel();
-        super.setLeftComponent(lPanel);
-        super.setRightComponent(rPanel);*/
-
 
     }
 
     public void updatePerson(int id) {
+        this.id = id;
         DBGetPerson dbGetPerson = new DBGetPerson(id);
         if (id == 0) {
             super.setLeftComponent(null);
@@ -72,26 +72,31 @@ public class SplitRight extends JSplitPane {
     private JPanel rightPanel() {
         JPanel jRightPanel = new JPanel();
         jRightPanel.setBorder(new EmptyBorder(10, 10, 10, 10));
-        //jRightPanel.setBackground(Color.RED);
         jRightPanel.setLayout(new BoxLayout(jRightPanel, BoxLayout.Y_AXIS));
         JLabel jRightLabelName = new JLabel(person.getName());
         jRightLabelName.setFont(new Font("Arial", Font.PLAIN, 34));
-        /*JLabel jDescriptionText = new JLabel("Description:");
-        jDescriptionText.setBorder(new EmptyBorder(10, 0, 10, 0));
-        jDescriptionText.setFont(new Font("Arial", Font.PLAIN, 24));*/
 
         JTextArea jRightTextDesc = new JTextArea(person.getDescription());
         jRightTextDesc.setWrapStyleWord(true);
         jRightTextDesc.setLineWrap(true);
-        //jRightTextDesc.setOpaque(false);
         jRightTextDesc.setEditable(false);
 
         JScrollPane jDescPane = new JScrollPane(jRightTextDesc,JScrollPane.VERTICAL_SCROLLBAR_ALWAYS,JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
         jDescPane.setBorder(new EmptyBorder(30, 0, 10, 0));
 
+        JButton deleteButton = new JButton("Delete");
+            deleteButton.addActionListener(new ActionListener() {
+                @Override
+                 public void actionPerformed(ActionEvent e) {
+                     new DBDeletePerson(id);
+                     updatePerson(0);       //TODO
+                 }
+            });
+
         jRightPanel.add(jRightLabelName);
-        //jRightPanel.add(jDescriptionText);
         jRightPanel.add(jDescPane);
+
+        jRightPanel.add(deleteButton);
 
         return jRightPanel;
     }

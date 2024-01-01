@@ -35,7 +35,6 @@ public class Main {
             System.exit(1);
         }
 
-         Connection dbConnection = new DBConnection().connect();
 
 
 
@@ -47,7 +46,8 @@ public class Main {
 
          MainSplitPane mainSplitPane = new MainSplitPane(scrollPane, right);
 
-         JPanel controlPanel = new JPanel();
+         //JPanel controlPanel = new JPanel();
+         ControlPane controlPanel = new ControlPane(left);
 
          JSplitPane jSplitPane = new JSplitPane(JSplitPane.VERTICAL_SPLIT,controlPanel,mainSplitPane);
          jSplitPane.setDividerSize(-1);
