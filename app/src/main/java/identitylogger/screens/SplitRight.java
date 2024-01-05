@@ -24,7 +24,7 @@ import identitylogger.database.DBGetPerson;
 
 public class SplitRight extends JSplitPane {
     String name;
-    Date dob;
+    //Date dob;
     Person person;
     int id;
 
@@ -55,8 +55,14 @@ public class SplitRight extends JSplitPane {
         JPanel jLeftPanel = new JPanel();
         jLeftPanel.setLayout(new BoxLayout(jLeftPanel, BoxLayout.Y_AXIS));
         JLabel iconLabel = new JLabel();
-        iconLabel.setSize(300,300);
-        ImageIcon iconLabelIcon = getResourceImage("./src/main/resources/personImages/default-avatar.jpg", iconLabel);
+        iconLabel.setSize(300,400);
+        //ImageIcon iconLabelIcon = getResourceImage("./src/main/resources/personImages/default-avatar.jpg", iconLabel);
+        String imagePath = "./src/main/resources/personImages/default-avatar.jpg";
+        if (person.getImagePath()!= null) {
+            imagePath = person.getImagePath();
+        }
+
+        ImageIcon iconLabelIcon = getResourceImage(imagePath, iconLabel);
 
         Date dob = person.getDOB();
         jLeftPanel.add(iconLabel);

@@ -39,6 +39,7 @@
     name VARCHAR(255) NOT NULL,
     dob DATE,
     description TEXT,
+    imagePath VARCHAR(255),
     );
     ```
 

@@ -5,11 +5,15 @@ import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.WindowEvent;
+import java.io.File;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.Date;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 
 import javax.swing.JButton;
+import javax.swing.JFileChooser;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
@@ -22,12 +26,15 @@ import java.text.ParseException;
 
 import identitylogger.database.DBInsertPerson;
 import identitylogger.screens.ControlPane;
+import identitylogger.util.ImageFilter;
 
 public class InsertForm extends JFrame {
     private JTextField nameField, dobField;
     private JTextArea descField;
     private SplitLeft list;
     private ControlPane cntrlPanel;
+
+    private String imageFile;
 
     public InsertForm(SplitLeft list, ControlPane cntrlPanel) {
         this.cntrlPanel =  cntrlPanel;
@@ -44,6 +51,24 @@ public class InsertForm extends JFrame {
         descField.setLineWrap(true);
         JScrollPane scrollPane = new JScrollPane(descField, JScrollPane.VERTICAL_SCROLLBAR_ALWAYS, JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
 
+        JFileChooser fChooser = new JFileChooser(); 
+        fChooser.addChoosableFileFilter(new ImageFilter());
+        fChooser.setAcceptAllFileFilterUsed(false);
+        JLabel imageFileLabel = new JLabel("File:");
+
+        JButton fileChooserButton = new JButton("Choose Image");
+                fileChooserButton.addActionListener(new ActionListener() {
+                    @Override
+                    public void actionPerformed(ActionEvent e) {
+                        fChooser.showDialog(null, "Select");
+
+                        imageFile = fChooser.getSelectedFile().getPath();
+
+                        imageFileLabel.setText("Selected File:" +imageFile);
+
+                    }
+                });
+
         JButton insertButton = new JButton("Insert Data");
                 insertButton.addActionListener(new ActionListener() {
                     @Override
@@ -52,7 +77,7 @@ public class InsertForm extends JFrame {
                     }
                 });
 
-        JButton cancelButton = new JButton("Cancle");
+        JButton cancelButton = new JButton("Cancel");
                 cancelButton.addActionListener(new ActionListener() {
                     @Override
                     public void actionPerformed(ActionEvent e) {
@@ -61,14 +86,19 @@ public class InsertForm extends JFrame {
                     }
                 });
 
-        JPanel panel = new JPanel(new GridLayout(4, 2, 10, 10));
+        JPanel panel = new JPanel(new GridLayout(5, 2, 10, 10));
         panel.add(new JLabel("Name:"));
         panel.add(nameField);
         panel.add(new JLabel("Date (YYYY-MM-DD):"));
         panel.add(dobField);
         panel.add(new JLabel("Text:"));
         panel.add(scrollPane);
-        //panel.add(new JLabel()); // Empty label for spacing
+
+        panel.add(fileChooserButton);
+        panel.add(imageFileLabel);
+
+       // panel.add(new JLabel()); // Empty label for spacing
+                          
         panel.add(insertButton);
         panel.add(cancelButton);
 
@@ -94,7 +124,7 @@ public class InsertForm extends JFrame {
             return;
         }
 
-        DBInsertPerson dbInsert = new DBInsertPerson(name,sqlDate,desc);
+        DBInsertPerson dbInsert = new DBInsertPerson(name,sqlDate,desc,imageFile);
 
         //super.dispatchEvent(new WindowEvent(this,WindowEvent.WINDOW_CLOSING));
         list.updateList();

@@ -14,8 +14,11 @@ import identitylogger.util.ReadProperties;
 import identitylogger.database.DBConnection;
 import identitylogger.screens.*;
 
+import com.formdev.flatlaf.FlatLightLaf;
+
 public class Main {
     public static void main(String[] args) {
+        FlatLightLaf.setup();
         JFrame mainFrame = new JFrame("People Project");
         mainFrame.setSize(800,500);
         mainFrame.setMinimumSize(new Dimension(800,500));

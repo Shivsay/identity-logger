@@ -27,6 +27,8 @@ dependencies {
  
     // https://mvnrepository.com/artifact/org.mariadb.jdbc/mariadb-java-client
     implementation 'org.mariadb.jdbc:mariadb-java-client:3.3.2'
+
+    implementation 'com.formdev:flatlaf:3.2.5'
 }
 
 // Apply a specific Java toolchain to ease working on different environments.
