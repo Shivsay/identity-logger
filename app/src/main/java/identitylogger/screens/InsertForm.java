@@ -1,6 +1,7 @@
 package identitylogger.screens;
 
 import java.awt.Dimension;
+import java.awt.FlowLayout;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -12,6 +13,7 @@ import java.util.Date;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 
+import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JFileChooser;
 import javax.swing.JFrame;
@@ -41,12 +43,13 @@ public class InsertForm extends JFrame {
         this.list = list;
         super.setTitle("Insert New Person");
         super.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        super.setMinimumSize(new Dimension(400,300));
-        super.setSize(700, 500);
+        super.setMinimumSize(new Dimension(650,700));
+        super.setMaximumSize(new Dimension(900,1000));
+        super.setSize(800, 700);
 
         nameField = new JTextField(20);
         dobField = new JTextField(20);
-        descField = new JTextArea(5,20);
+        descField = new JTextArea(20,50);
         descField.setWrapStyleWord(true);
         descField.setLineWrap(true);
         JScrollPane scrollPane = new JScrollPane(descField, JScrollPane.VERTICAL_SCROLLBAR_ALWAYS, JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
@@ -86,21 +89,38 @@ public class InsertForm extends JFrame {
                     }
                 });
 
-        JPanel panel = new JPanel(new GridLayout(5, 2, 10, 10));
-        panel.add(new JLabel("Name:"));
-        panel.add(nameField);
-        panel.add(new JLabel("Date (YYYY-MM-DD):"));
-        panel.add(dobField);
-        panel.add(new JLabel("Text:"));
-        panel.add(scrollPane);
+        //JPanel panel = new JPanel(new GridLayout(5, 1, 10, 10));
+        JPanel panel = new JPanel();
+        panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
 
-        panel.add(fileChooserButton);
-        panel.add(imageFileLabel);
+        JPanel namePanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
+        JPanel datePanel = new JPanel((new FlowLayout(FlowLayout.LEFT)));
+        JPanel descLabelPanel = new JPanel((new FlowLayout(FlowLayout.LEFT)));
+        JPanel descTextPanel = new JPanel((new FlowLayout(FlowLayout.LEFT)));
+        JPanel filePanel = new JPanel((new FlowLayout(FlowLayout.LEFT)));
+        JPanel btnPanel = new JPanel((new FlowLayout(FlowLayout.LEFT)));
 
-       // panel.add(new JLabel()); // Empty label for spacing
+        namePanel.add(new JLabel("Name:"));
+        namePanel.add(nameField);
+        panel.add(namePanel);
+
+        datePanel.add(new JLabel("Date (YYYY-MM-DD):"));
+        datePanel.add(dobField);
+        panel.add(datePanel);
+
+        descLabelPanel.add(new JLabel("Description:"));
+        descTextPanel.add(scrollPane);
+        panel.add(descLabelPanel);
+        panel.add(descTextPanel);
+
+
+        filePanel.add(fileChooserButton);
+        filePanel.add(imageFileLabel);
+        panel.add(filePanel);
                           
-        panel.add(insertButton);
-        panel.add(cancelButton);
+        btnPanel.add(insertButton);
+        btnPanel.add(cancelButton);
+        panel.add(btnPanel);
 
         add(panel);
 
