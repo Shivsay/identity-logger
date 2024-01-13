@@ -146,7 +146,7 @@ public class InsertForm extends JFrame {
 
         DBInsertPerson dbInsert = new DBInsertPerson(name,sqlDate,desc,imageFile);
 
-        //super.dispatchEvent(new WindowEvent(this,WindowEvent.WINDOW_CLOSING));
+        this.setVisible(false);
         list.updateList();
         System.out.println("Updated");
         this.dispose();
